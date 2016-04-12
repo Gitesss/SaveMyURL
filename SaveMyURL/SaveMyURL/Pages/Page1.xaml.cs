@@ -1,4 +1,6 @@
 ﻿using System;
+using Windows.UI;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace SaveMyURL.Pages
@@ -12,5 +14,16 @@ namespace SaveMyURL.Pages
         {
             this.InitializeComponent();
         }
+
+        public void addMoreOptionsForControlers()
+        {
+
+        }
+
+        private void Grid_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            GridWidth.Width = ListViewIteamWidth.ActualWidth;
+        }
+
     }
 }

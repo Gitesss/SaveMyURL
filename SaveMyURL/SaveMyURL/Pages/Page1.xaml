@@ -6,12 +6,45 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.BottomAppBar>
+        <AppBar IsOpen="True" IsSticky="True">
+            <StackPanel Orientation="Horizontal">
+                <CommandBar>
+                    <CommandBar.SecondaryCommands>
+                        <AppBarButton Name="Hide" Icon="Cancel" Label="Hide Other" Visibility="Collapsed" />
+                    </CommandBar.SecondaryCommands>
+                </CommandBar>
+                <AppBarButton Name="Show" Icon="Accept" Label="Show Other" />
+            </StackPanel>
+        </AppBar>
+    </Page.BottomAppBar>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" SizeChanged="Grid_SizeChanged">
         <ScrollViewer Padding="{x:Bind Frame.Padding, Mode=OneWay}">
             <StackPanel>
-                <TextBlock Text="Page 1" Style="{StaticResource TitleTextBlockStyle}" DataContext="{x:Bind Frame}" Visibility="{Binding PageTitleVisibility}" />
-                <TextBlock Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce vulputate posuere erat viverra ornare. Proin a massa a mi porttitor consequat vitae non lacus. Vivamus efficitur dui non ipsum sagittis, a maximus neque ornare. Donec vehicula viverra lacus, at placerat odio. Integer at ipsum sed est commodo ultricies et quis ipsum. Vivamus condimentum velit eget diam sodales ullamcorper. Nunc arcu nisl, tincidunt vel iaculis nec, malesuada quis ipsum. Nunc tincidunt risus quis venenatis dictum. Donec cursus ac enim eu pulvinar. Sed ultricies, risus in ullamcorper bibendum, metus sem hendrerit est, ac eleifend neque nulla a risus. Aenean accumsan nunc eu massa fermentum, at pellentesque lorem commodo. Proin congue sagittis ex vitae fermentum. Phasellus rutrum in erat vitae cursus. Quisque quis lacus sed felis dictum tempor nec non orci. In nec risus faucibus, efficitur est eget, luctus tellus." Style="{StaticResource ParagraphTextBlockStyle}" />
+                <Grid>
+                    <TextBlock Margin="10,0,0,0" Text="Grupy linków" Style="{StaticResource TitleTextBlockStyle}" />
+                    <Button Margin="0,0,10,0" Content="dsadsad" HorizontalAlignment="Right"/>
+                </Grid>
+                <AutoSuggestBox Margin="10" QueryIcon="Find"></AutoSuggestBox>
+                <ListViewItem Name="ListViewIteamWidth"  Margin="0,10,0,0"   >
+                    <Grid Name="GridWidth">
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Margin="0,0,10,0"  Width="50" Height="50">
+                                <Ellipse.Fill>
+                                    <ImageBrush>
+                                        <ImageBrush.ImageSource>
+                                            <BitmapImage DecodePixelHeight="50" DecodePixelWidth="50" UriSource="../Assets/StoreLogo.png" />
+                                        </ImageBrush.ImageSource>
+                                    </ImageBrush>
+                                </Ellipse.Fill>
+                            </Ellipse>
+                            <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center">Grupa</TextBlock>
+                        </StackPanel>
+                        <Button HorizontalContentAlignment="Right" HorizontalAlignment="Right" Margin="0,0,50,0" ></Button>
+                    
+                    </Grid>
+                </ListViewItem>
+                <Rectangle Margin="70,0,0,0"  Height="2"  Fill="Gray" />
             </StackPanel>
         </ScrollViewer>
     </Grid>
