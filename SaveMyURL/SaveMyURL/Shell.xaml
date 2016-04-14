@@ -55,7 +55,8 @@
                     <ListView Grid.Row="2"
                               ItemsSource="{x:Bind ViewModel.BottomItems}"
                               SelectedItem="{x:Bind ViewModel.SelectedBottomItem, Mode=TwoWay, Converter={StaticResource NavigationItemToObjectConverter}}"
-                              Style="{StaticResource MenuNavigationListViewStyle}" />
+                              Style="{StaticResource MenuNavigationListViewStyle}" 
+                              />
                 </Grid>
             </SplitView.Pane>
             <SplitView.Content>
