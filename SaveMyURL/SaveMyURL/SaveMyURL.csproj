@@ -96,6 +96,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\ApplicationContext.cs" />
+    <Compile Include="Model\Entity.cs" />
+    <Compile Include="Model\Group.cs" />
+    <Compile Include="Model\Initializer.cs" />
+    <Compile Include="Model\Link.cs" />
+    <Compile Include="Model\Tag.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -174,7 +180,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Model\" />
+    <Folder Include="MVVM\" />
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

@@ -7,6 +7,8 @@ using Windows.Phone.UI.Input;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using Microsoft.Data.Entity;
+using SaveMyURL.Model;
 
 namespace SaveMyURL
 {
@@ -25,6 +27,13 @@ namespace SaveMyURL
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            using (var db = new ApplicationContext())
+            {
+                
+                db.Database.EnsureCreated();
+                Initializer.Seed(db);
+            }
         }
 
         /// <summary>
