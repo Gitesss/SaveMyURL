@@ -102,6 +102,14 @@
     <Compile Include="Model\Initializer.cs" />
     <Compile Include="Model\Link.cs" />
     <Compile Include="Model\Tag.cs" />
+    <Compile Include="Repositories\AutofacConfig.cs" />
+    <Compile Include="Repositories\IGroupRepository.cs" />
+    <Compile Include="Repositories\GroupRepository.cs" />
+    <Compile Include="Repositories\Command.cs" />
+    <Compile Include="Repositories\IEntityRepository.cs" />
+    <Compile Include="Repositories\EntityRepository.cs" />
+    <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\IBaseRepository.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -124,6 +132,7 @@
     <Compile Include="Presentation\DisplayableTheme.cs" />
     <Compile Include="Presentation\SettingsViewModel.cs" />
     <Compile Include="Presentation\ShellViewModel.cs" />
+    <Compile Include="ViewModel\Class1.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -179,10 +188,7 @@
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="MVVM\" />
-    <Folder Include="ViewModel\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>

@@ -1,8 +1,9 @@
 ﻿using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Intense.Presentation;
-using SaveMyURL.Presentation;
+using SaveMyURL.Model;
+using SaveMyURL.Repositories;
+using SaveMyURL.ViewModel;
 
 namespace SaveMyURL.Pages
 {
@@ -11,9 +12,12 @@ namespace SaveMyURL.Pages
     /// </summary>
     public sealed partial class WelcomePage : Page
     {
+        private static ApplicationContext db = new ApplicationContext();
+        private GroupRepository group = new GroupRepository(db);
         public WelcomePage()
         {
             this.InitializeComponent();
+
         }
 
         private void lstViewEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -21,22 +25,18 @@ namespace SaveMyURL.Pages
             throw new NotImplementedException();
         }
 
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            var vm = new ShellViewModel();
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Welcomevcxvxcv", PageType = typeof(WelcomePage) });
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 1vcxvcxv", PageType = typeof(Page1) });
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 2cvcxv", PageType = typeof(Page2) });
-        }
-
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Group MojaNowaGrupa = new Group() { Name = "WszystkoINic" };
+
+            group.Add(MojaNowaGrupa);
+            
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             throw new NotImplementedException();
         }
+
     }
 }

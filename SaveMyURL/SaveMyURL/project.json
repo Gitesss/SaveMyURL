@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Autofac": "3.5.2",
     "EntityFramework.Commands": "7.0.0-rc1-final",
     "EntityFramework.SQLite": "7.0.0-rc1-final",
     "Intense": "0.5.0",

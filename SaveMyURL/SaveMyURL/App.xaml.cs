@@ -7,8 +7,11 @@ using Windows.Phone.UI.Input;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
+using Autofac;
+using Autofac.Core;
 using Microsoft.Data.Entity;
 using SaveMyURL.Model;
+using SaveMyURL.Repositories;
 
 namespace SaveMyURL
 {
@@ -18,7 +21,7 @@ namespace SaveMyURL
     /// </summary>
     sealed partial class App : Application
     {
-
+        private static IContainer Container { get; set; }
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -28,12 +31,15 @@ namespace SaveMyURL
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
+
             using (var db = new ApplicationContext())
             {
                 
                 db.Database.EnsureCreated();
                 Initializer.Seed(db);
             }
+
+
         }
 
         /// <summary>
