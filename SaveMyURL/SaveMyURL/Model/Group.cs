@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SaveMyURL.Model
 {
-    public class Group : Entity
+    public class Group : IObjectWithId
     {
         public string Name { get; set; }
         public ICollection<Link> Links { get; set; }
+        public int Id { get; set; }
     }
 }

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Intense.Presentation;
+using SaveMyURL.Model;
+using SaveMyURL.MVVM;
 using SaveMyURL.Presentation;
 
 namespace SaveMyURL.Pages
@@ -11,9 +14,11 @@ namespace SaveMyURL.Pages
     /// </summary>
     public sealed partial class WelcomePage : Page
     {
+        private GroupService service;
         public WelcomePage()
         {
             this.InitializeComponent();
+            service = new GroupService();
         }
 
         private void lstViewEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -31,12 +36,15 @@ namespace SaveMyURL.Pages
 
         private void btnCreate_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Group oo = new Group() {Name = "dsdsdd", Links = new List<Link> {new Link() { Description = "dsad", RatingStars = 2 } } };
+            service.Add(oo);
+            service.Save();
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            Group oo = new Group() { Name = "dsdsdd", Links = new List<Link> { new Link() { Description = "dsad", RatingStars = 2 } } };
+            service.Delete(oo);
         }
     }
 }

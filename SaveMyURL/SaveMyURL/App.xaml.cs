@@ -31,7 +31,7 @@ namespace SaveMyURL
             using (var db = new ApplicationContext())
             {
                 
-                db.Database.EnsureCreated();
+               if(!db.Database.EnsureCreated()) 
                 Initializer.Seed(db);
             }
         }

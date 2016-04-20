@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SaveMyURL.Model
 {
-    public abstract class Entity
+    public interface  IObjectWithId
     {
-        public int Id { get; set; }
+         int Id { get; set; }
     }
 }
