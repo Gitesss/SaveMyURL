@@ -16,6 +16,7 @@ namespace SaveMyURL.Model
             var tag = new Tag()
             {
                 Name = "geek",
+
             };
             context.Tags.Add(tag);
 
@@ -38,6 +39,7 @@ namespace SaveMyURL.Model
             {
                 Name = "komputerek",
                 Links = listOfLinks,
+                Image = null,
             };
             context.Groups.Add(group);
 

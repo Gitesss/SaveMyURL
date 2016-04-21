@@ -7,7 +7,7 @@ using SaveMyURL.Model;
 
 namespace SaveMyURL.MVVM
 {
-    public class GroupService : BaseGenericService<ApplicationContext,Group>
+    public class GroupService : BaseGenericService<ApplicationContext, Group>
     {
         public GroupService()
         {
@@ -18,5 +18,6 @@ namespace SaveMyURL.MVVM
         {
             return Context.Set<Group>().SingleOrDefault(x => x.Name == name);
         }
+
     }
 }

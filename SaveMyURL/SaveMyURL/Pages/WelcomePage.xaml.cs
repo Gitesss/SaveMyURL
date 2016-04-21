@@ -6,6 +6,7 @@ using Intense.Presentation;
 using SaveMyURL.Model;
 using SaveMyURL.MVVM;
 using SaveMyURL.Presentation;
+using SaveMyURL.ViewModel;
 
 namespace SaveMyURL.Pages
 {
@@ -14,11 +15,12 @@ namespace SaveMyURL.Pages
     /// </summary>
     public sealed partial class WelcomePage : Page
     {
-        private GroupService service;
+
+        GroupViewModel groupViewModel = new GroupViewModel();
         public WelcomePage()
         {
             this.InitializeComponent();
-            service = new GroupService();
+            DataContext = groupViewModel;
         }
 
         private void lstViewEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -26,25 +28,5 @@ namespace SaveMyURL.Pages
             throw new NotImplementedException();
         }
 
-        private void btnUpdate_Click(object sender, RoutedEventArgs e)
-        {
-            var vm = new ShellViewModel();
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Welcomevcxvxcv", PageType = typeof(WelcomePage) });
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 1vcxvcxv", PageType = typeof(Page1) });
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 2cvcxv", PageType = typeof(Page2) });
-        }
-
-        private void btnCreate_Click(object sender, RoutedEventArgs e)
-        {
-            Group oo = new Group() {Name = "dsdsdd", Links = new List<Link> {new Link() { Description = "dsad", RatingStars = 2 } } };
-            service.Add(oo);
-            service.Save();
-        }
-
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
-        {
-            Group oo = new Group() { Name = "dsdsdd", Links = new List<Link> { new Link() { Description = "dsad", RatingStars = 2 } } };
-            service.Delete(oo);
-        }
     }
 }

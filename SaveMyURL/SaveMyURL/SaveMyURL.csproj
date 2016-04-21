@@ -102,11 +102,15 @@
     <Compile Include="Model\Initializer.cs" />
     <Compile Include="Model\Link.cs" />
     <Compile Include="Model\Tag.cs" />
-    <Compile Include="MVVM\Class1.cs" />
+    <Compile Include="MVVM\BindableBase.cs" />
+    <Compile Include="MVVM\Command.cs" />
+    <Compile Include="MVVM\ViewModelBase.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Service\BaseGenericService.cs" />
     <Compile Include="Service\GroupService.cs" />
-    <Compile Include="Service\Class4.cs" />
+    <Compile Include="Service\LinkService.cs" />
     <Compile Include="Service\BaseService.cs" />
+    <Compile Include="Service\TagService.cs" />
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>

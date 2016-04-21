@@ -9,7 +9,7 @@ using SaveMyURL.Service;
 
 namespace SaveMyURL.MVVM
 {
-    public abstract class BaseGenericService<DBContext, Entity> : BaseService
+    public abstract class BaseGenericService<DBContext, Entity> : BaseService, IDisposable
            where DBContext : ApplicationContext, new()
            where Entity : class, IObjectWithId, new()
     {
@@ -98,5 +98,23 @@ namespace SaveMyURL.MVVM
             }
         }
 
+        #region Implementing IDispose
+        private bool _disposed;
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        private void Dispose(bool disposing)
+        {
+            if (_disposed || !disposing)
+                return;
+            if (Context != null)
+                Context.Dispose();
+            _disposed = true;
+        }
+        #endregion
     }
 }

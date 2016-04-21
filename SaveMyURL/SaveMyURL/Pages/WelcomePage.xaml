@@ -26,8 +26,8 @@
                 </TextBlock>
                 <TextBlock Text="Happy coding!" />-->
                 <StackPanel Name="sPanelEmployee" Orientation="Vertical" Margin="10,11,1040,23">
-                    <TextBlock Text="First Name" Margin="2 2 2 2" FontSize="14"/>
-                    <TextBox Name="txtFirstName" Text="{Binding FirstName, Mode=TwoWay}"/>
+                    <TextBlock Text="Name" Margin="2 2 2 2" FontSize="14"/>
+                    <TextBox Name="txtName" Text="{Binding Name, Mode=TwoWay}"/>
                     <TextBlock Text="Last Name" Margin="2 2 2 2" FontSize="14"/>
                     <TextBox Name="txtLastName" Text="{Binding LastName, Mode=TwoWay}"/>
                     <TextBlock Text="Email" Margin="2 2 2 2" FontSize="14"/>
@@ -35,9 +35,9 @@
                     <TextBlock Text="Department" Margin="2 2 2 2" FontSize="14" />
                     <ComboBox Name="cboDepartment" ItemsSource="{Binding Department}" DisplayMemberPath="DepartmentName" SelectedValuePath="DepartmentId" SelectedValue="{Binding DepartmentId, Mode=TwoWay}" />
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
-                        <Button x:Name="btnCreate" Content="Create" Click="btnCreate_Click" />
-                        <Button x:Name="btnUpdate" Content="Update" Click="btnUpdate_Click" />
-                        <Button x:Name="btnDelete" Content="Delete" Click="btnDelete_Click" />
+                        <Button x:Name="btnCreate" Content="Create" Command="{Binding InsertGroupCommand}" />
+                        <Button x:Name="btnUpdate" Content="Update"  />
+                        <Button x:Name="btnDelete" Content="Delete"  />
                     </StackPanel>
                 </StackPanel>
                 <StackPanel>
