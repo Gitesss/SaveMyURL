@@ -26,7 +26,7 @@ namespace SaveMyURL.MVVM
         public virtual ICollection<Entity> GetCollection()
         {
 
-            return Context.Set<Entity>().ToList();
+            return Context.Set<Entity>().OrderByDescending(x => x.Id).ToList();
         }
 
         public virtual Entity GetObjectById(int Id)

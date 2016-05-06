@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Xaml.Media.Imaging;
 using SaveMyURL.Annotations;
 using SaveMyURL.Model;
 using SaveMyURL.MVVM;
@@ -30,8 +32,8 @@ namespace SaveMyURL.ViewModel
             set { Set(ref _name, value); }
         }
 
-        private byte[] _image;
-        public byte[] Image
+        private BitmapImage _image;
+        public BitmapImage Image
         {
             get { return _image; }
             set { Set(ref _image, value); }
@@ -113,6 +115,19 @@ namespace SaveMyURL.ViewModel
                 }
             }
         }
+
+        public ObservableCollection<Group> GetGroupss()
+        {
+            using (var logic = new GroupService())
+            {
+                foreach (var d in logic.GetCollection())
+                {
+                    Groups.Add(d);
+                }
+            }
+
+            return Groups;
+        }
         //private void GetLinks()
         //{
         //    using (var logic = new BusinessLogicContext())
@@ -124,14 +139,16 @@ namespace SaveMyURL.ViewModel
         //    }
         //}
 
-        private void AddGroup(string name)
+        private async void AddGroup(string name, BitmapImage image)
         {
             using (var logic = new GroupService())
             {
+
                 var group = new Group()
                 {
                     GroupDay = DateTime.Now,
                     Name = name,
+                  //  Image = await ConvertImageSql.ConvertToBytesAsync(image),
                     Links = new List<Link>(),
                 };
 
@@ -142,11 +159,24 @@ namespace SaveMyURL.ViewModel
             }
         }
 
+        public IEnumerable<Group> GetGroupsForSuggest(string query)
+        {
+            List<Group> groups = new List<Group>();
+            using (var logic = new GroupService())
+            {
+                groups.AddRange(logic.GetCollection());
+            }
+
+            return groups
+                .Where(c => c.Name.IndexOf(query, StringComparison.CurrentCultureIgnoreCase) > -1)
+                .OrderByDescending(c => c.Name.StartsWith(query, StringComparison.CurrentCultureIgnoreCase));
+        }
+
         public Command InsertGroupCommand
         {
             get
             {
-                return new Command(_ => AddGroup(Name));
+                return new Command(_ => AddGroup(Name,Image));
             }
         }
     }

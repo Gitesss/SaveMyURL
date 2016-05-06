@@ -104,7 +104,11 @@
     <Compile Include="Model\Tag.cs" />
     <Compile Include="MVVM\BindableBase.cs" />
     <Compile Include="MVVM\Command.cs" />
+    <Compile Include="MVVM\ConvertImageSql.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
+    <Compile Include="Pages\AddOrUpdateGroup.xaml.cs">
+      <DependentUpon>AddOrUpdateGroup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Service\BaseGenericService.cs" />
     <Compile Include="Service\GroupService.cs" />
@@ -142,6 +146,7 @@
     <None Include="SaveMyURL_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\picture-add-256x256.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
@@ -150,12 +155,17 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="Assets\Add-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Pages\AddOrUpdateGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Shell.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
