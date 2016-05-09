@@ -25,8 +25,10 @@ namespace SaveMyURL.Model
             set { Set(ref _name, value); }
         }
 
+
+
         private ICollection<Link> _links;
-        public ICollection<Link> Links
+        public virtual ICollection<Link> Links
         {
             get { return _links; }
             set { Set(ref _links, value); }

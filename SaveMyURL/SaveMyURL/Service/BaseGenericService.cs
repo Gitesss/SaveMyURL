@@ -40,6 +40,8 @@ namespace SaveMyURL.MVVM
 
             try
             {
+                Context.RemoveRange(objToDelete as Entity);
+                Context.SaveChanges();
                 Context.Set<Entity>().Remove(objToDelete as Entity);
                 Context.SaveChanges();
                 return true;
@@ -48,7 +50,6 @@ namespace SaveMyURL.MVVM
             {
                 string error = ex.Message;
                 return false;
-
             }
 
         }

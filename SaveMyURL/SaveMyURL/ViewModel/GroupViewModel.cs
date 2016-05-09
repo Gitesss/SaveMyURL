@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
 using SaveMyURL.Annotations;
 using SaveMyURL.Model;
@@ -58,6 +59,7 @@ namespace SaveMyURL.ViewModel
         public GroupViewModel()
         {
             GetGroups();
+
         }
 
 
@@ -148,7 +150,7 @@ namespace SaveMyURL.ViewModel
                 {
                     GroupDay = DateTime.Now,
                     Name = name,
-                  //  Image = await ConvertImageSql.ConvertToBytesAsync(image),
+                    //  Image = await ConvertImageSql.ConvertToBytesAsync(image),
                     Links = new List<Link>(),
                 };
 
@@ -159,25 +161,43 @@ namespace SaveMyURL.ViewModel
             }
         }
 
-        public IEnumerable<Group> GetGroupsForSuggest(string query)
+        public async void DeleteGroup(Group objectToDelete)
         {
-            List<Group> groups = new List<Group>();
-            using (var logic = new GroupService())
-            {
-                groups.AddRange(logic.GetCollection());
-            }
 
-            return groups
-                .Where(c => c.Name.IndexOf(query, StringComparison.CurrentCultureIgnoreCase) > -1)
-                .OrderByDescending(c => c.Name.StartsWith(query, StringComparison.CurrentCultureIgnoreCase));
+            var dialog = new MessageDialog("Are you sure?");
+            dialog.Title = "Really?";
+            dialog.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
+            dialog.Commands.Add(new UICommand { Label = "Cancel", Id = 1 });
+            var res = await dialog.ShowAsync();
+
+            if ((int)res.Id == 0)
+            {
+                using (var logic = new GroupService())
+                {
+                    logic.DeleteCurrentGroup(objectToDelete);
+                }
+            }
         }
+
 
         public Command InsertGroupCommand
         {
             get
             {
-                return new Command(_ => AddGroup(Name,Image));
+                return new Command(_ => AddGroup(Name, Image));
             }
         }
+
+        //    public Command DeleteGroupCommand
+        //    {
+        //        get
+        //        {
+        //            return new Command((s) =>
+        //            {
+        //                var a = s.ToString();
+        //                DeleteGroup(CurrentGroupSelected.Id);
+        //            }, (s) => (CurrentGroupSelected != null));
+        //        }
+        //    }
     }
 }

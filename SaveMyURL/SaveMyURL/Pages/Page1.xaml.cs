@@ -54,7 +54,7 @@ namespace SaveMyURL.Pages
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-
+            groupViewModel.DeleteGroup(ListViewIteam.SelectedItem as Group);
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
@@ -62,56 +62,5 @@ namespace SaveMyURL.Pages
 
         }
 
-        private void suggestions_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
-        {
-            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
-            {
-                var groups = groupViewModel.Groups;
-
-                sender.ItemsSource = groups.ToList();
-            }
-        }
-
-        private void suggestions_SuggestionChosen(AutoSuggestBox sender, AutoSuggestBoxSuggestionChosenEventArgs args)
-        {
-            var group = args.SelectedItem as Group;
-
-            sender.Text = string.Format("{0} (data: {1})", group.Name, group.GroupDay.ToString());
-        }
-
-        private void asb_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
-        {
-            if (args.ChosenSuggestion != null)
-            {
-                //User selected an item, take an action on it here
-                SelectGroup(args.ChosenSuggestion as Group);
-            }
-            else
-            {
-                //Do a fuzzy search on the query text
-                var matchingGroup = groupViewModel.GetGroupsForSuggest(args.QueryText);
-
-                if (matchingGroup.Count() >= 1)
-                {
-                    //Choose the first match
-                    SelectGroup(matchingGroup.FirstOrDefault());
-                }
-                else
-                {
-                    NoResults.Visibility = Visibility.Visible;
-                }
-            }
-
-        }
-        private void SelectGroup(Group group)
-        {
-            if (group != null)
-            {
-
-                ContactDetails.Visibility = Visibility.Visible;
-                ContactName.Text = group.Name;
-                ContactCompany.Text = group.GroupDay.ToString();
-            }
-        }
     }
 }
