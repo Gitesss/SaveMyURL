@@ -10,7 +10,7 @@
     
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer Padding="{x:Bind Frame.Padding, Mode=OneWay}" PointerMoved="ScrollViewer_PointerMoved">
+        <ScrollViewer Padding="{x:Bind Frame.Padding, Mode=OneWay}">
             <StackPanel>
                 <Grid>
                     <TextBlock Margin="10,0,0,0" Text="Grupy linków" Style="{StaticResource TitleTextBlockStyle}" />
@@ -68,7 +68,7 @@
                     SelectedItem="{Binding CurrentGroupSelected, Mode=TwoWay}"
                     ItemsSource="{Binding Groups}"
                     SelectionMode="Single"
-                    ShowsScrollingPlaceholders="True">
+                    ShowsScrollingPlaceholders="True" DoubleTapped="ListViewIteam_DoubleTapped">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment" Value="Stretch" />

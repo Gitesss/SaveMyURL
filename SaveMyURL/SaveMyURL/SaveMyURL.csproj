@@ -109,6 +109,9 @@
     <Compile Include="Pages\AddOrUpdateGroup.xaml.cs">
       <DependentUpon>AddOrUpdateGroup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\LinkPage.xaml.cs">
+      <DependentUpon>LinkPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Service\BaseGenericService.cs" />
     <Compile Include="Service\GroupService.cs" />
@@ -163,6 +166,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Page Include="Pages\AddOrUpdateGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\LinkPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

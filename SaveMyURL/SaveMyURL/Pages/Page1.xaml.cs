@@ -80,10 +80,10 @@ namespace SaveMyURL.Pages
 
         }
 
-        private void ScrollViewer_PointerMoved(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        private void ListViewIteam_DoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
         {
-            actualPointerGroup = (Group) sender
-                ;
+            Group selectedGroup = (Group) ListViewIteam.SelectedItem;
+            this.Frame.Navigate(typeof(LinkPage),selectedGroup);
         }
     }
 }
