@@ -23,6 +23,7 @@ namespace SaveMyURL
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
+
         public App()
         {
             this.InitializeComponent();
@@ -30,10 +31,11 @@ namespace SaveMyURL
 
             using (var db = new ApplicationContext())
             {
-                
-               if(!db.Database.EnsureCreated()) 
-                Initializer.Seed(db);
+
+                if (!db.Database.EnsureCreated())
+                    Initializer.Seed(db);
             }
+
         }
 
         /// <summary>
@@ -45,7 +47,8 @@ namespace SaveMyURL
         {
 
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached) {
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
                 // disabled, obscures the hamburger button, enable if you need it
                 //this.DebugSettings.EnableFrameRateCounter = true;
             }
@@ -56,7 +59,8 @@ namespace SaveMyURL
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            if (shell == null) {
+            if (shell == null)
+            {
                 // Create a Shell which navigates to the first page
                 shell = new Shell();
 
@@ -64,7 +68,8 @@ namespace SaveMyURL
                 shell.RootFrame.NavigationFailed += OnNavigationFailed;
                 shell.RootFrame.Navigated += OnNavigated;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated) {
+                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+                {
                     //TODO: Load state from previously suspended application
                 }
 
@@ -74,7 +79,8 @@ namespace SaveMyURL
                 // listen for back button clicks (both soft- and hardware)
                 SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 
-                if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons")) {
+                if (ApiInformation.IsTypePresent("Windows.Phone.UI.Input.HardwareButtons"))
+                {
                     HardwareButtons.BackPressed += OnBackPressed;
                 }
 
@@ -89,7 +95,8 @@ namespace SaveMyURL
         void OnBackPressed(object sender, BackPressedEventArgs e)
         {
             var shell = (Shell)Window.Current.Content;
-            if (shell.RootFrame.CanGoBack) {
+            if (shell.RootFrame.CanGoBack)
+            {
                 e.Handled = true;
                 shell.RootFrame.GoBack();
             }
@@ -99,7 +106,8 @@ namespace SaveMyURL
         void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
             var shell = (Shell)Window.Current.Content;
-            if (shell.RootFrame.CanGoBack) {
+            if (shell.RootFrame.CanGoBack)
+            {
                 e.Handled = true;
                 shell.RootFrame.GoBack();
             }
@@ -139,7 +147,8 @@ namespace SaveMyURL
             var shell = (Shell)Window.Current.Content;
 
             var visibility = AppViewBackButtonVisibility.Collapsed;
-            if (shell.RootFrame.CanGoBack) {
+            if (shell.RootFrame.CanGoBack)
+            {
                 visibility = AppViewBackButtonVisibility.Visible;
             }
 

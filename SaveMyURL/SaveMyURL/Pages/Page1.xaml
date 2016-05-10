@@ -10,7 +10,7 @@
     
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ScrollViewer Padding="{x:Bind Frame.Padding, Mode=OneWay}">
+        <ScrollViewer Padding="{x:Bind Frame.Padding, Mode=OneWay}" PointerMoved="ScrollViewer_PointerMoved">
             <StackPanel>
                 <Grid>
                     <TextBlock Margin="10,0,0,0" Text="Grupy linków" Style="{StaticResource TitleTextBlockStyle}" />
@@ -88,7 +88,7 @@
                                         </Ellipse.Fill>
                                     </Ellipse>
                                     <StackPanel Orientation="Vertical">
-                                        <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" Style="{ThemeResource BaseTextBlockStyle}"/>
+                                        <TextBlock Name ="txtName"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" Style="{ThemeResource BaseTextBlockStyle}"/>
                                         <TextBlock  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding GroupDay}"  Style="{ThemeResource BodyTextBlockStyle}"/>
                                     </StackPanel>
                                 </StackPanel>

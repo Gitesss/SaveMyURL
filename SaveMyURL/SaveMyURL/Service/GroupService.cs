@@ -26,22 +26,10 @@ namespace SaveMyURL.MVVM
             if (group == null)
                 throw new ArgumentNullException();
 
-            Context.Set<Group>().Attach(objectToDelete);//this work only for one obejt but if i have one-to-many this don't work
+            Context.Set<Group>().Attach(objectToDelete);
             Context.Set<Group>().Remove(objectToDelete);
             Context.SaveChanges();
 
-
-            //foreach (var link in group.Links)
-            //{
-            //    foreach (var tag in link.Tags)
-            //    {
-            //        Context.Set<Tag>().Remove(tag);
-            //    }
-            //    Context.Set<Link>().Remove(link);
-            //}
-            //Context.Set<Group>().Remove(group);
-
-            //Context.SaveChanges();
 
         }
 

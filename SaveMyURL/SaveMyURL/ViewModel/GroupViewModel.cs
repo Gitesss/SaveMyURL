@@ -15,7 +15,7 @@ using SaveMyURL.MVVM;
 
 namespace SaveMyURL.ViewModel
 {
-    class GroupViewModel : ViewModelBase
+    public class GroupViewModel : ViewModelBase
     {
 
         #region properties of group
@@ -93,7 +93,7 @@ namespace SaveMyURL.ViewModel
         private ObservableCollection<Group> _groups = new ObservableCollection<Group>();
         public ObservableCollection<Group> Groups
         {
-            get { return _groups; }
+            get { return _groups;  }
             set
             {
                 Set(ref _groups, value);
@@ -141,7 +141,7 @@ namespace SaveMyURL.ViewModel
         //    }
         //}
 
-        private async void AddGroup(string name, BitmapImage image)
+        private void AddGroup(string name, BitmapImage image)
         {
             using (var logic = new GroupService())
             {
@@ -164,10 +164,10 @@ namespace SaveMyURL.ViewModel
         public async void DeleteGroup(Group objectToDelete)
         {
 
-            var dialog = new MessageDialog("Are you sure?");
-            dialog.Title = "Really?";
-            dialog.Commands.Add(new UICommand { Label = "Ok", Id = 0 });
-            dialog.Commands.Add(new UICommand { Label = "Cancel", Id = 1 });
+            var dialog = new MessageDialog("Czy jesteś pewien usunięcia grupy '" + objectToDelete.Name + "' ?");
+            dialog.Title = "Naprawdę?";
+            dialog.Commands.Add(new UICommand { Label = "Tak", Id = 0 });
+            dialog.Commands.Add(new UICommand { Label = "Nie", Id = 1 });
             var res = await dialog.ShowAsync();
 
             if ((int)res.Id == 0)
@@ -176,7 +176,9 @@ namespace SaveMyURL.ViewModel
                 {
                     logic.DeleteCurrentGroup(objectToDelete);
                 }
+                Groups.Remove(objectToDelete);
             }
+
         }
 
 

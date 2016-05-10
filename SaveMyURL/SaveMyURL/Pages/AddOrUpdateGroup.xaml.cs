@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
+using SaveMyURL.Model;
 using SaveMyURL.ViewModel;
 
 // The Content Dialog item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -26,15 +27,12 @@ namespace SaveMyURL.Pages
     public sealed partial class AddOrUpdateGroup : ContentDialog
     {
         private FileOpenPicker openPicker = new FileOpenPicker();
-        private GroupViewModel groupViewModel;
         public AddOrUpdateGroup()
         {
             this.InitializeComponent();
-            groupViewModel = new GroupViewModel();
-            DataContext = groupViewModel;
-            
+
         }
-       
+
         private async void Ellipse_Tapped(object sender, TappedRoutedEventArgs e)
         {
             openPicker.ViewMode = PickerViewMode.Thumbnail;

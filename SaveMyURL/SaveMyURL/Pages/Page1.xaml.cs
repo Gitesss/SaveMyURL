@@ -3,10 +3,12 @@ using System.Linq;
 using Windows.ApplicationModel.Contacts;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
+using Windows.Media.SpeechRecognition;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.UI;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -25,12 +27,12 @@ namespace SaveMyURL.Pages
     {
 
         private GroupViewModel groupViewModel;
+        private Group actualPointerGroup;
         public Page1()
         {
             this.InitializeComponent();
             groupViewModel = new GroupViewModel();
             DataContext = groupViewModel;
-            //    GroupCollection.Source = groupViewModel.Groups;
         }
 
         public void addMoreOptionsForControlers()
@@ -42,6 +44,9 @@ namespace SaveMyURL.Pages
         {
 
             AddOrUpdateGroup add = new AddOrUpdateGroup();
+            ListViewIteam.SelectedItem = null;
+            add.DataContext = groupViewModel;
+
             var btn = sender as Button;
             var result = await add.ShowAsync();
 
@@ -49,12 +54,25 @@ namespace SaveMyURL.Pages
                 add.Hide();
             else if (result == ContentDialogResult.Secondary)
                 add.Hide();
-
         }
 
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            groupViewModel.DeleteGroup(ListViewIteam.SelectedItem as Group);
+
+
+            if (ListViewIteam.SelectedItem == null)
+            {
+                var dialog = new MessageDialog("Najpierw zaznacz, a pózniej naciśnij przycisk 'usuń'.");
+                dialog.Title = "Błąd?";
+                dialog.Commands.Add(new UICommand {Label = "OK", Id = 0});
+                var res = await dialog.ShowAsync();
+            }
+            else
+            {
+                groupViewModel.DeleteGroup(ListViewIteam.SelectedItem as Group);
+            }
+
+
         }
 
         private async void Button_Click_2(object sender, RoutedEventArgs e)
@@ -62,5 +80,10 @@ namespace SaveMyURL.Pages
 
         }
 
+        private void ScrollViewer_PointerMoved(object sender, Windows.UI.Xaml.Input.PointerRoutedEventArgs e)
+        {
+            actualPointerGroup = (Group) sender
+                ;
+        }
     }
 }
