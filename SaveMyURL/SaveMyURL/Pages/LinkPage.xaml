@@ -42,14 +42,24 @@
                         <Rectangle Margin="70,0,0,0"  Height="2"  Fill="Gray" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />
                     </Grid>
                 </ListViewItem>-->
-
-
+                <!--<RadioButton x:Name="CustomRB" GroupName="TargetGroup" Content="Custom"/>-->
+                <TextBox x:Name="TargetTextBox"
+                     AllowDrop="True"
+                     TextWrapping="Wrap"
+                     Drop="TargetTextBox_Drop"
+                     DragEnter="TargetTextBox_DragEnter"
+                     DragLeave="TargetTextBox_DragLeave"
+                     AcceptsReturn="True"
+                     MinHeight="60"
+                     PlaceholderText="Dodaj adres URl (Przeciągnij)" 
+                     VerticalAlignment="Bottom" Margin="20,5,20,0"
+                     />
                 <ListView 
                     Name="ListViewIteam"
                     ItemsSource="{Binding Links}"
                     SelectedItem="{Binding CurrentLinkSelected, Mode=TwoWay}"
-                    SelectionMode="Single"
-                    ShowsScrollingPlaceholders="True" >
+                    ShowsScrollingPlaceholders="True" 
+                    AllowDrop="True" SelectionMode="Single">
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="HorizontalContentAlignment"  Value="Stretch" />
@@ -68,7 +78,7 @@
                                             <ListView.ItemTemplate>
                                                 <DataTemplate>
                                                     <Viewbox>
-                                                        <TextBlock  TextWrapping="Wrap" Style="{ThemeResource BodyTextBlockStyle}"  Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="DetectFromContent"></TextBlock>
+                                                        <TextBlock  TextWrapping="Wrap" Style="{ThemeResource BodyTextBlockStyle}"  Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
                                                     </Viewbox>
                                                 </DataTemplate>
                                             </ListView.ItemTemplate>
