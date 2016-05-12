@@ -13,6 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using SaveMyURL.Model;
+using SaveMyURL.ViewModel;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -24,16 +25,20 @@ namespace SaveMyURL.Pages
     public sealed partial class LinkPage : Page
     {
         private Group selectedGroup;
+        private LinkViewModel _linkViewModel;
         public LinkPage()
         {
+            
             this.InitializeComponent();
+
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             selectedGroup = e.Parameter as Group;
+            _linkViewModel = new LinkViewModel(selectedGroup);
+            DataContext = _linkViewModel;
             txtGroupName.Text = selectedGroup.Name;
-
         }
     }
 }

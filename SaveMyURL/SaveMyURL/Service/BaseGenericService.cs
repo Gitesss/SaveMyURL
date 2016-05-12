@@ -36,6 +36,16 @@ namespace SaveMyURL.MVVM
             return Context.Set<Entity>().FirstOrDefault(x => x.Id == Id) as Entity;
         }
 
+        //public virtual ICollection<Link> GetChildrenById(int Id)
+        //{
+        //    var childrens = Context.Set<Group>() .Include(x => x.Links).ToList();
+        //    if (childrens == null)
+        //    {
+                
+        //    }
+        //    return childrens;
+        //}
+
         public virtual bool Delete(object objToDelete)
         {
 

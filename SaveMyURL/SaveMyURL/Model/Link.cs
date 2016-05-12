@@ -18,7 +18,7 @@ namespace SaveMyURL.Model
         public int RatingStars { get; set; }
 
         public Group Group { get; set; }
-        public virtual ICollection<Tag> Tags { get; set; }
+        public ICollection<Tag> Tags { get; set; }
 
     }
 }

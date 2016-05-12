@@ -19,5 +19,10 @@ namespace SaveMyURL.Service
         {
             return Context.Set<Tag>().SingleOrDefault(x => x.Name == tagName);
         }
+
+        public IEnumerable<Tag> GetCollection(int idLink)
+        {
+            return Context.Set<Tag>().Where(x => x.Link.Id == idLink).ToList();
+        }
     }
 }

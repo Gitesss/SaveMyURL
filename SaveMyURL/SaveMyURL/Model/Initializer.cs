@@ -18,22 +18,41 @@ namespace SaveMyURL.Model
                 Name = "geek",
 
             };
+            var tag2 = new Tag()
+            {
+                Name = "Szkoła",
+
+            };
             context.Tags.Add(tag);
+
 
             var listOfTags = new List<Tag>();
             listOfTags.Add(tag);
+            listOfTags.Add(tag2);
             var link = new Link()
             {
                 DateTime = DateTime.Now,
                 Description = "O jak ja lubie wszystko i wszystkich",
+                URL = "dsdsdsdsd",
                 Image = null,
                 Tags = listOfTags,
                 RatingStars = 5,
                 
             };
+            var link2 = new Link()
+            {
+                DateTime = DateTime.Now,
+                URL = "dsdsdsdsd",
+                Description = "cos nie gra",
+                Image = null,
+                Tags = listOfTags,
+                RatingStars = 5,
+
+            };
             context.Links.Add(link);
 
             var listOfLinks = new List<Link>();
+            listOfLinks.Add(link2);
             listOfLinks.Add(link);
             var group = new Group()
             {

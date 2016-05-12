@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SaveMyURL.Model;
+using Microsoft.Data.Entity;
 
 namespace SaveMyURL.MVVM
 {
@@ -19,9 +20,10 @@ namespace SaveMyURL.MVVM
         //    return Context.Set<Link>().Where(x => x.Tab.Nazwa == nameOfTab).ToList();
         //}
 
+
         public IEnumerable<Link> GetCollection(int idGroup)
         {
-            return Context.Set<Group>().FirstOrDefault(x => x.Id == idGroup).Links;
+            return Context.Set<Link>().Where(x => x.Group.Id == idGroup).ToList();
         }
     }
 }

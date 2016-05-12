@@ -14,9 +14,12 @@ namespace SaveMyURL.Model
         public DbSet<Link> Links { get; set; }
         public DbSet<Tag> Tags { get; set; }
 
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Filename=SaveMyURLData.db");
+            
         }
 
 
@@ -32,15 +35,15 @@ namespace SaveMyURL.Model
             modelBuilder.Entity<Tag>().ToTable(TableNameTags);
 
             modelBuilder.Entity<Link>()
-            .HasOne(p => p.Group)
-            .WithMany(b => b.Links)
-            .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(p => p.Group)
+                .WithMany(b => b.Links)
+                .OnDelete(DeleteBehavior.Cascade);
 
 
             modelBuilder.Entity<Tag>()
-            .HasOne(p => p.Link)
-            .WithMany(b => b.Tags)
-            .OnDelete(DeleteBehavior.Cascade);
+                .HasOne(p => p.Link)
+                .WithMany(b => b.Tags)
+                .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(modelBuilder);
 

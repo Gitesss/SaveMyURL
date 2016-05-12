@@ -141,6 +141,7 @@
     <Compile Include="Presentation\SettingsViewModel.cs" />
     <Compile Include="Presentation\ShellViewModel.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
+    <Compile Include="ViewModel\LinkViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
