@@ -51,8 +51,9 @@
                      DragLeave="TargetTextBox_DragLeave"
                      AcceptsReturn="True"
                      MinHeight="60"
+                     Text="{Binding Text, Mode=TwoWay}"
                      PlaceholderText="Dodaj adres URl (Przeciągnij)" 
-                     VerticalAlignment="Bottom" Margin="20,5,20,0"
+                     VerticalAlignment="Bottom" Margin="20,5,20,0" TextChanging="TargetTextBox_TextChanging" 
                      />
                 <ListView 
                     Name="ListViewIteam"
@@ -69,16 +70,21 @@
                         <DataTemplate>
                             <Grid>
                                 <StackPanel Margin="20,0,0,0">
-                                    <HyperlinkButton Name ="HyperlinkButtonName"  NavigateUri="{Binding Url}" VerticalAlignment="Top" HorizontalAlignment="Left" Content="{Binding Description}"/>
+                                    <HyperlinkButton  Name ="HyperlinkButtonName"  NavigateUri="{Binding URL}" VerticalAlignment="Top" HorizontalAlignment="Left" Content="{Binding Description}"/>
                                     <StackPanel Margin="20,0,0,0" Orientation="Horizontal">
-                                        <TextBlock FontSize="15" Name="TextBlockTag" Style="{ThemeResource BodyTextBlockStyle}" VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tagi: "/>
+                                        <TextBlock FontSize="15" Style="{StaticResource ParagraphTextBlockStyle}"
+                                        Name="TextBlockTag"  VerticalAlignment="Center" HorizontalAlignment="Left" Text="Tagi:" MinHeight="1" MinWidth="1"/>
                                         <ListView x:Name="MessagesListView" ItemsSource="{Binding Tags}"    ScrollViewer.HorizontalScrollBarVisibility="Auto"
                                                   ScrollViewer.HorizontalScrollMode="Enabled"
                                                   ScrollViewer.VerticalScrollMode="Disabled">
                                             <ListView.ItemTemplate>
                                                 <DataTemplate>
                                                     <Viewbox>
-                                                        <TextBlock  TextWrapping="Wrap" Style="{ThemeResource BodyTextBlockStyle}"  Text="{Binding Path=Name}" HorizontalAlignment="Center" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                                                    <TextBlock  TextWrapping="Wrap"   HorizontalAlignment="Center" VerticalAlignment="Center"
+                                                                    TextAlignment="Center" Style="{StaticResource ParagraphTextBlockStyle}" >
+                                                            <Run Text="{Binding Path=Name}"></Run>
+                                                            <Run>,</Run>
+                                                        </TextBlock>
                                                     </Viewbox>
                                                 </DataTemplate>
                                             </ListView.ItemTemplate>
@@ -94,7 +100,7 @@
                                 <Button HorizontalContentAlignment="Right" HorizontalAlignment="Right" Margin="0,0,50,0"
                                 FontSize="24" 
                                 RelativePanel.AlignRightWithPanel="True"  BorderBrush="{x:Null}"
-                                Background="{x:Null}" Foreground="Red">
+                                Background="{x:Null}" Foreground="Red" Click="Button_Click">
                                     <Button.Content>
                                         <SymbolIcon Symbol="Delete"></SymbolIcon>
                                     </Button.Content>

@@ -24,5 +24,13 @@ namespace SaveMyURL.Service
         {
             return Context.Set<Tag>().Where(x => x.Link.Id == idLink).ToList();
         }
+
+        public IEnumerable<Tag> GetCollectionTags()
+        {
+            var distinctList = GetCollection();
+            return distinctList.GroupBy(x => x.Name)
+                         .Select(g => g.First())
+                         .ToList();
+        }
     }
 }

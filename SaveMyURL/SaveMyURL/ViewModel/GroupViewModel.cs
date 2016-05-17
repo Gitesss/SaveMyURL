@@ -7,6 +7,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.Storage.Pickers;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
 using SaveMyURL.Annotations;
@@ -93,7 +95,7 @@ namespace SaveMyURL.ViewModel
         private ObservableCollection<Group> _groups = new ObservableCollection<Group>();
         public ObservableCollection<Group> Groups
         {
-            get { return _groups;  }
+            get { return _groups; }
             set
             {
                 Set(ref _groups, value);
@@ -160,6 +162,32 @@ namespace SaveMyURL.ViewModel
                 Groups.Add(group);
             }
         }
+
+        //public async void AddImage()
+        //{
+        //    FileOpenPicker openPicker = new FileOpenPicker();
+
+        //    openPicker.ViewMode = PickerViewMode.Thumbnail;
+        //    openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+        //    openPicker.FileTypeFilter.Add(".jpeg");
+        //    openPicker.FileTypeFilter.Add(".png");
+        //    openPicker.FileTypeFilter.Add(".bmp");
+        //    openPicker.FileTypeFilter.Add(".jpg");
+
+        //    StorageFile file = await openPicker.PickSingleFileAsync();
+        //    if (file != null)
+        //    {
+        //        var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+        //        var image = new BitmapImage();
+        //        image.SetSource(stream);
+        //        Image = image;
+        //    }
+        //    else
+        //    {
+        //        string error = "Nie wybrano żadnego pliku jpg/png";
+
+        //    }
+        //}
 
         public async void DeleteGroup(Group objectToDelete)
         {

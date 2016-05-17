@@ -8,68 +8,38 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="Welcome" Style="{StaticResource TitleTextBlockStyle}" DataContext="{x:Bind Frame}" Visibility="{Binding PageTitleVisibility}" />
+        <TextBlock Margin="10,0,0,0" Text="Witamy" Style="{StaticResource TitleTextBlockStyle}" DataContext="{x:Bind Frame}" Visibility="{Binding PageTitleVisibility}" />
         <ScrollViewer Padding="{x:Bind Frame.Padding, Mode=OneWay}" Margin="0,20,0,0">
-            <StackPanel Orientation="Horizontal">
-
-                <!--<TextBlock Style="{StaticResource ParagraphTextBlockStyle}">
-                    <Run Text="Thank you for installing the Intense templates. This is a Univeral Windows project template for multi-page apps. Among others this project uses the following concepts and patterns;" />
-                    <LineBreak /><LineBreak />
-                    <Run Text="• SplitView navigation pattern" /><LineBreak />
-                    <Run Text="• Adaptive layout using the new AdaptiveTrigger of the VisualStateManager" /><LineBreak />
-                    <Run Text="• Basic MVVM (easily swappable for a 3rd party alternative, or your own version)" /><LineBreak />
-                    <Run Text="• Soft- and hardware back button support" /><LineBreak />
-                    <Run Text="• Proper use of font styles according to the " /><Hyperlink NavigateUri="https://msdn.microsoft.com/en-us/library/windows/apps/hh700394.aspx"><Run Text="Universal Windows Platform font guidelines" /></Hyperlink><LineBreak />
-                    <Run Text="• Extensive use of Segoe MDL2 Assets for icons" /><LineBreak />
-                    <Run Text="• {x:Bind} for performant bindings" /><LineBreak />
-                    <Run Text="• Uses new C# 6 language features such as nameof, and the null-conditional operator" />
-                </TextBlock>
-                <TextBlock Text="Happy coding!" />-->
-                <StackPanel Name="sPanelEmployee" Orientation="Vertical" Margin="10,11,1040,23">
-                    <TextBlock Text="Name" Margin="2 2 2 2" FontSize="14"/>
-                    <TextBox Name="txtName" Text="{Binding Name, Mode=TwoWay}"/>
-                    <TextBlock Text="Last Name" Margin="2 2 2 2" FontSize="14"/>
-                    <TextBox Name="txtLastName" Text="{Binding LastName, Mode=TwoWay}"/>
-                    <TextBlock Text="Email" Margin="2 2 2 2" FontSize="14"/>
-                    <TextBox Name="txtEmail" Text="{Binding Email, Mode=TwoWay}"/>
-                    <TextBlock Text="Department" Margin="2 2 2 2" FontSize="14" />
-                    <ComboBox Name="cboDepartment" ItemsSource="{Binding Department}" DisplayMemberPath="DepartmentName" SelectedValuePath="DepartmentId" SelectedValue="{Binding DepartmentId, Mode=TwoWay}" />
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 10 0 0">
-                        <Button x:Name="btnCreate" Content="Create" Command="{Binding InsertGroupCommand}" />
-                        <Button x:Name="btnUpdate" Content="Update"  />
-                        <Button x:Name="btnDelete" Content="Delete"  />
-                    </StackPanel>
-                </StackPanel>
-                <StackPanel>
-                    <ListView Name="lstViewEmployees" ItemsSource="{Binding}" Margin="399,11,10,10" SelectionChanged="lstViewEmployees_SelectionChanged" >
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Vertical"  Margin="4">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Employee Id" Width="300"></TextBlock>
-                                        <TextBlock Text="{Binding EmployeeId}" ></TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="First Name" Width="300"></TextBlock>
-                                        <TextBlock Text="{Binding FirstName}" ></TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Last Name" Width="300"></TextBlock>
-                                        <TextBlock Text="{Binding LastName}"></TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="Email" Width="300"></TextBlock>
-                                        <TextBlock Text="{Binding Email}" ></TextBlock>
-                                    </StackPanel>
-                                    <StackPanel Orientation="Horizontal" >
-                                        <TextBlock Text="Department" Width="300"></TextBlock>
-                                        <TextBlock Text="{Binding DepartmentId}" ></TextBlock>
-                                    </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </StackPanel>
+            <StackPanel Margin="10,20,10,0">
+                <TextBlock Text="Lista ostatnio dodanych linków" Style="{StaticResource TitleTextBlockStyle}" HorizontalAlignment="Center" FontWeight="Normal" Foreground="#FF6178B7"/>
+                <ListView 
+                    Name="ListViewIteam"
+                    ItemsSource="{Binding Links}"
+                    SelectedItem="{Binding CurrentLinkSelected, Mode=TwoWay}"
+                    ShowsScrollingPlaceholders="True" 
+                    AllowDrop="True" SelectionMode="Single">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment"  Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <HyperlinkButton Margin="20,0,0,0"  NavigateUri="{Binding URL}" VerticalAlignment="Stretch" HorizontalAlignment="Left" HorizontalContentAlignment="Left">
+                                    <HyperlinkButton.Content>
+                                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                                    </HyperlinkButton.Content>
+                                </HyperlinkButton>
+                                <!--<HyperlinkButton   Name ="HyperlinkButtonName"  NavigateUri="{Binding URL}" VerticalAlignment="Stretch" HorizontalAlignment="Left"
+                                                   Content="{Binding Description}" HorizontalContentAlignment="Left"/>-->
+                                <TextBlock   HorizontalAlignment="Right" Margin="0,0,50,0"
+                                RelativePanel.AlignRightWithPanel="True"  Text="{Binding DateTime}" />
+                                <Rectangle Margin="20,5,20,0"  Height="2"  Fill="LightGray" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
             </StackPanel>
         </ScrollViewer>
     </Grid>

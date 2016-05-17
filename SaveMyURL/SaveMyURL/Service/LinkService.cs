@@ -25,5 +25,11 @@ namespace SaveMyURL.MVVM
         {
             return Context.Set<Link>().Where(x => x.Group.Id == idGroup).ToList();
         }
+    
+        public IEnumerable<Link> GetLastAddedlink()
+        {
+            return Context.Set<Link>().OrderByDescending(x => x.DateTime).Take(50);
+        }
+
     }
 }

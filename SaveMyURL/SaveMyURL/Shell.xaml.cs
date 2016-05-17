@@ -14,12 +14,12 @@ namespace SaveMyURL
             this.InitializeComponent();
 
             var vm = new ShellViewModel();
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Welcome", PageType = typeof(WelcomePage) });
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 1", PageType = typeof(Page1) });
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 2", PageType = typeof(Page2) });
-            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Page 3", PageType = typeof(Page3) });
+            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Witam", PageType = typeof(WelcomePage) });
+            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Grupy", PageType = typeof(Page1) });
+            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Tagi", PageType = typeof(Page2) });
+            vm.TopItems.Add(new NavigationItem { Icon = "", DisplayName = "Ostatnio usunięte", PageType = typeof(Page3) });
 
-            vm.BottomItems.Add(new NavigationItem { Icon = "", DisplayName = "Settings", PageType = typeof(SettingsPage) });
+            vm.BottomItems.Add(new NavigationItem { Icon = "", DisplayName = "Ustawienia", PageType = typeof(SettingsPage) });
 
             // select the first top item
             vm.SelectedItem = vm.TopItems.First();

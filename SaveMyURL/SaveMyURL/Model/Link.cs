@@ -16,6 +16,7 @@ namespace SaveMyURL.Model
         public DateTime DateTime { get; set; }
         public byte[] Image { get; set; }
         public int RatingStars { get; set; }
+        public int GroupId { get; set; }
 
         public Group Group { get; set; }
         public ICollection<Tag> Tags { get; set; }

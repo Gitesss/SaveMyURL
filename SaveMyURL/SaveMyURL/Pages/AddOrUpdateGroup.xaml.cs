@@ -57,6 +57,7 @@ namespace SaveMyURL.Pages
                 string error = "Nie wybrano żadnego pliku jpg/png";
 
             }
+
         }
 
         private void Ellipse_PointerMoved(object sender, PointerRoutedEventArgs e)

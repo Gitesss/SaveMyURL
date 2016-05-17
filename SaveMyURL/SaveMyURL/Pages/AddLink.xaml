@@ -1,0 +1,45 @@
+﻿<ContentDialog
+    x:Class="SaveMyURL.Pages.AddLink"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:SaveMyURL.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:system="using:System"
+    xmlns:interop="using:Windows.UI.Xaml.Interop"
+    Title="Dodaj nowy adres URL"
+    PrimaryButtonText="Zapisz"
+    SecondaryButtonText="Anuluj"
+    PrimaryButtonClick="ContentDialog_PrimaryButtonClick"
+    SecondaryButtonClick="ContentDialog_SecondaryButtonClick">
+
+    
+    
+    <Grid>
+        
+        <StackPanel Margin="0,10,0,0">
+            <TextBlock Text="Adres URL:"/>
+            <TextBox Name="txtUrl" Text="{Binding URL, Mode=TwoWay}" PlaceholderText="Podaj adres..."></TextBox>
+            <TextBlock Text="Nadpis:"/>
+            <TextBox  Name="txtDescription" Text="{Binding Description, Mode=TwoWay}" PlaceholderText="Podaj nadpis..."></TextBox>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel>
+                    <TextBlock Text="Ocena:"/>
+                    <ComboBox Name="ComboBoxRating" MaxDropDownHeight="5">
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Margin="40,0">
+                    <TextBlock Text="Tagi:"/>
+                    <ComboBox ItemsSource="{Binding AllTagsList}">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</ContentDialog>

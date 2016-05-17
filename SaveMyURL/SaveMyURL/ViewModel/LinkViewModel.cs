@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using SaveMyURL.Model;
 using SaveMyURL.MVVM;
+using SaveMyURL.Pages;
 using SaveMyURL.Service;
 
 namespace SaveMyURL.ViewModel
@@ -20,9 +23,11 @@ namespace SaveMyURL.ViewModel
             set { Set(ref _id, value); }
         }
 
+
         private string _description = default(string);
         public string Description
         {
+
             get { return _description; }
             set { Set(ref _description, value); }
         }
@@ -34,12 +39,32 @@ namespace SaveMyURL.ViewModel
             set { Set(ref _ratingStars, value); }
         }
 
+        private ObservableCollection<int> _numbers = new ObservableCollection<int>();
+
+        public ObservableCollection<int> Numbers
+        {
+            get { return _numbers; }
+            set
+            {
+                for (int i = 1; i <= 5; i++)
+                {
+                    _numbers.Add(i);
+                }
+            }
+        }
 
         private string _url = default(string);
-        public string Url
+        public string URL
         {
             get { return _url; }
             set { Set(ref _url, value); }
+        }
+
+        private string _text = default(string);
+        public string Text
+        {
+            get { return _text; }
+            set { Set(ref _text, value); }
         }
 
         private BitmapImage _image; //I will this delete
@@ -64,12 +89,19 @@ namespace SaveMyURL.ViewModel
         }
         #endregion
 
+        readonly int groupId;
+
         public LinkViewModel(Group group)
         {
             GetLinks(group);
             GetTags();
+            groupId = group.Id;
         }
 
+        public LinkViewModel()
+        {
+            GetLinks();
+        }
 
         private Link _cureentLinkSelected = null;
         public Link CurrentLinkSelected
@@ -81,7 +113,7 @@ namespace SaveMyURL.ViewModel
                 if (_cureentLinkSelected != null)
                 {
                     Id = _cureentLinkSelected.Id;
-                    Url = _cureentLinkSelected.URL;
+                    URL = _cureentLinkSelected.URL;
                     Description = _cureentLinkSelected.Description;
                     LinkDay = _cureentLinkSelected.DateTime;
                     Tags = _cureentLinkSelected.Tags;
@@ -90,7 +122,7 @@ namespace SaveMyURL.ViewModel
                 else
                 {
                     Id = 0;
-                    Url = string.Empty;
+                    URL = string.Empty;
                     Description = string.Empty;
                     LinkDay = DateTime.Now;
                     Tags = null;
@@ -120,6 +152,15 @@ namespace SaveMyURL.ViewModel
             }
         }
 
+        private ObservableCollection<Tag> _allTagsList = new ObservableCollection<Tag>();
+        public ObservableCollection<Tag> AllTagsList
+        {
+            get { return _allTagsList; }
+            set
+            {
+                Set(ref _allTagsList, value);
+            }
+        }
 
         //private string _linkTags;
         //public string LinkTags
@@ -186,6 +227,28 @@ namespace SaveMyURL.ViewModel
             }
         }
 
+        private void GetLastLinks()
+        {
+            using (var logic = new LinkService())
+            {
+                foreach (var link in logic.GetCollection())
+                {
+                    Links.Add(link);
+                }
+            }
+        }
+
+        private void GetLinks()
+        {
+            using (var logic = new LinkService())
+            {
+                foreach (var link in logic.GetLastAddedlink())
+                {
+                    Links.Add(link);
+                }
+            }
+        }
+
         private void GetTags()
         {
             using (var logic = new TagService())
@@ -198,59 +261,91 @@ namespace SaveMyURL.ViewModel
                     }
                     link.Tags = TagsList;
                 }
+
+                foreach (var tag in logic.GetCollectionTags())
+                {
+                    AllTagsList.Add(tag);
+                }
+            }
+        }
+
+        public async void Addlink(string url)
+        {
+            URL = url;
+            Description = url;
+            if (url.Length > 20)
+                Description = url.Substring(0, 20);
+            RatingStars = 3;
+
+            AddLink addLink = new AddLink();
+            addLink.DataContext = this;
+            var res = await addLink.ShowAsync();
+
+            if (res == ContentDialogResult.Primary)
+            {
+                using (var logic = new LinkService())
+                {
+                    var link = new Link()
+                    {
+                        DateTime = DateTime.Now,
+                        URL = url,
+                        Description = Description,
+                        RatingStars = 0,
+                        GroupId = groupId,
+                        //  Image = await ConvertImageSql.ConvertToBytesAsync(image),
+                        Tags = new List<Tag>(),
+                    };
+
+                    logic.Add(link);
+                    logic.Save();
+
+                    Links.Add(link);
+                }
+
+            }
+
+            //var dialog = new MessageDialog("Czy jesteś pewien usunięcia grupy '" + objectToDelete.Name + "' ?");
+            //dialog.Title = "Naprawdę?";
+            //dialog.Commands.Add(new UICommand { Label = "Tak", Id = 0 });
+            //dialog.Commands.Add(new UICommand { Label = "Nie", Id = 1 });
+            //var res = await dialog.ShowAsync();
+
+            //if ((int)res.Id == 0)
+            //{
+            //    using (var logic = new GroupService())
+            //    {
+            //        logic.DeleteCurrentGroup(objectToDelete);
+            //    }
+            //    Groups.Remove(objectToDelete);
+            //}
+        }
+
+        public async void DeleteLink(Link objectToDelete)
+        {
+            var dialog = new MessageDialog("Czy jesteś pewien usunięcia grupy '" + objectToDelete.Description + "' ?");
+            dialog.Title = "Naprawdę?";
+            dialog.Commands.Add(new UICommand { Label = "Tak", Id = 0 });
+            dialog.Commands.Add(new UICommand { Label = "Nie", Id = 1 });
+            var res = await dialog.ShowAsync();
+
+            if ((int)res.Id == 0)
+            {
+                using (var logic = new LinkService())
+                {
+                    logic.Delete(objectToDelete);
+                }
+                Links.Remove(objectToDelete);
             }
         }
 
 
-
-        //private void AddGroup(string name, BitmapImage image)
-        //{
-        //    using (var logic = new GroupService())
-        //    {
-
-        //        var group = new Group()
-        //        {
-        //            GroupDay = DateTime.Now,
-        //            Name = name,
-        //            //  Image = await ConvertImageSql.ConvertToBytesAsync(image),
-        //            Links = new List<Link>(),
-        //        };
-
-        //        logic.Add(group);
-        //        logic.Save();
-
-        //        Groups.Add(group);
-        //    }
-        //}
-
-        //public async void DeleteGroup(Group objectToDelete)
-        //{
-
-        //    var dialog = new MessageDialog("Czy jesteś pewien usunięcia grupy '" + objectToDelete.Name + "' ?");
-        //    dialog.Title = "Naprawdę?";
-        //    dialog.Commands.Add(new UICommand { Label = "Tak", Id = 0 });
-        //    dialog.Commands.Add(new UICommand { Label = "Nie", Id = 1 });
-        //    var res = await dialog.ShowAsync();
-
-        //    if ((int)res.Id == 0)
-        //    {
-        //        using (var logic = new GroupService())
-        //        {
-        //            logic.DeleteCurrentGroup(objectToDelete);
-        //        }
-        //        Groups.Remove(objectToDelete);
-        //    }
-
-        //}
-
-
-        //public Command InsertGroupCommand
-        //{
-        //    get
-        //    {
-        //        return new Command(_ => AddGroup(Name, Windows.UI.Xaml.Controls.Image));
-        //    }
-        //}
+        public Command InsertLinkCommand
+        {
+            get
+            {
+                return new Command(_ => Addlink(URL));
+            }
+        }
 
         //    public Command DeleteGroupCommand
         //    {

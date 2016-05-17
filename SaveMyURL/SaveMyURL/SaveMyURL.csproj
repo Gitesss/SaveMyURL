@@ -106,6 +106,9 @@
     <Compile Include="MVVM\Command.cs" />
     <Compile Include="MVVM\ConvertImageSql.cs" />
     <Compile Include="MVVM\ViewModelBase.cs" />
+    <Compile Include="Pages\AddLink.xaml.cs">
+      <DependentUpon>AddLink.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AddOrUpdateGroup.xaml.cs">
       <DependentUpon>AddOrUpdateGroup.xaml</DependentUpon>
     </Compile>
@@ -166,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Pages\AddLink.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AddOrUpdateGroup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -16,17 +16,12 @@ namespace SaveMyURL.Pages
     public sealed partial class WelcomePage : Page
     {
 
-        GroupViewModel groupViewModel = new GroupViewModel();
+        private LinkViewModel _linkViewModel;
         public WelcomePage()
         {
             this.InitializeComponent();
-            DataContext = groupViewModel;
+            _linkViewModel = new LinkViewModel();
+            DataContext = _linkViewModel;
         }
-
-        private void lstViewEmployees_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

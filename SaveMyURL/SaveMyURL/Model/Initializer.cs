@@ -33,7 +33,7 @@ namespace SaveMyURL.Model
             {
                 DateTime = DateTime.Now,
                 Description = "O jak ja lubie wszystko i wszystkich",
-                URL = "dsdsdsdsd",
+                URL = "https://www.facebook.com/",
                 Image = null,
                 Tags = listOfTags,
                 RatingStars = 5,
@@ -42,7 +42,7 @@ namespace SaveMyURL.Model
             var link2 = new Link()
             {
                 DateTime = DateTime.Now,
-                URL = "dsdsdsdsd",
+                URL = "https://www.o2.pl/",
                 Description = "cos nie gra",
                 Image = null,
                 Tags = listOfTags,

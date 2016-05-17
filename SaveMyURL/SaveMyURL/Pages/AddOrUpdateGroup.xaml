@@ -16,12 +16,12 @@
         <StackPanel Orientation="Vertical">
             <Rectangle   Height="2"  Fill="Gray" Margin="0,10"/>
             <StackPanel Orientation="Horizontal">
-                <Ellipse  x:Name="ellipse" Margin="0,0,10,0" Width="50" Height="50" Tapped="Ellipse_Tapped" PointerMoved="Ellipse_PointerMoved" RenderTransformOrigin="0.5,0.5" Stroke="Black">
+                <Ellipse x:Name="ellipse" Margin="0,0,10,0" Width="50" Height="50" Tapped="Ellipse_Tapped" PointerMoved="Ellipse_PointerMoved" RenderTransformOrigin="0.5,0.5" Stroke="Black">
                     <Ellipse.RenderTransform>
                         <CompositeTransform/>
                     </Ellipse.RenderTransform>
                     <Ellipse.Fill >
-                        <ImageBrush x:Name="imageBrush"  ImageSource="{Binding Image, Mode=TwoWay}">
+                        <ImageBrush x:Name="imageBrush" ImageSource="{Binding Image, Mode=TwoWay}">
                         </ImageBrush>
                     </Ellipse.Fill>
                 </Ellipse>
