@@ -26,38 +26,42 @@ namespace SaveMyURL.Pages
 {
     public sealed partial class AddOrUpdateGroup : ContentDialog
     {
-        private FileOpenPicker openPicker = new FileOpenPicker();
+        //private FileOpenPicker openPicker = new FileOpenPicker();
+        //private GroupViewModel groupViewModel;
         public AddOrUpdateGroup()
         {
             this.InitializeComponent();
+           // groupViewModel = new GroupViewModel();
 
         }
 
         private async void Ellipse_Tapped(object sender, TappedRoutedEventArgs e)
         {
-            openPicker.ViewMode = PickerViewMode.Thumbnail;
-            openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-            openPicker.FileTypeFilter.Add(".jpeg");
-            openPicker.FileTypeFilter.Add(".png");
-            openPicker.FileTypeFilter.Add(".bmp");
-            openPicker.FileTypeFilter.Add(".jpg");
+            //openPicker.ViewMode = PickerViewMode.Thumbnail;
+            //openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            //openPicker.FileTypeFilter.Add(".jpeg");
+            //openPicker.FileTypeFilter.Add(".png");
+            //openPicker.FileTypeFilter.Add(".bmp");
+            //openPicker.FileTypeFilter.Add(".jpg");
 
-            StorageFile file = await openPicker.PickSingleFileAsync();
-            if (file != null)
-            {
-                var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-                var image = new BitmapImage();
-                image.SetSource(stream);
-                imageBrush.ImageSource = image;
+            //StorageFile file = await openPicker.PickSingleFileAsync();
+            //if (file != null)
+            //{
+            //    var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
+            //    var image = new BitmapImage();
+            //    image.SetSource(stream);
+            //    imageBrush.ImageSource = image;
+            //    InitializeComponent();
+            //    file.
+            //}
+            //else
+            //{
+            //    string error = "Nie wybrano żadnego pliku jpg/png";
 
-
-            }
-            else
-            {
-                string error = "Nie wybrano żadnego pliku jpg/png";
-
-            }
-
+            //}
+            //groupViewModel.AddImage();
+            GroupViewModel group = this.DataContext as GroupViewModel;
+            group.AddImage();
         }
 
         private void Ellipse_PointerMoved(object sender, PointerRoutedEventArgs e)

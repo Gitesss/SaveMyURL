@@ -14,7 +14,6 @@ namespace SaveMyURL.Model
         public string URL { get; set; }
         public string Description { get; set; }
         public DateTime DateTime { get; set; }
-        public byte[] Image { get; set; }
         public int RatingStars { get; set; }
         public int GroupId { get; set; }
 

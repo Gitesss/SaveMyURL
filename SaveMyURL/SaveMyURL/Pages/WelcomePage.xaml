@@ -26,13 +26,12 @@
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
-                                <HyperlinkButton Margin="20,0,0,0"  NavigateUri="{Binding URL}" VerticalAlignment="Stretch" HorizontalAlignment="Left" HorizontalContentAlignment="Left">
+                                <HyperlinkButton Margin="20,0,230,0"  NavigateUri="{Binding URL}" VerticalAlignment="Stretch"
+                                                 HorizontalAlignment="Left" HorizontalContentAlignment="Left">
                                     <HyperlinkButton.Content>
                                         <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
                                     </HyperlinkButton.Content>
                                 </HyperlinkButton>
-                                <!--<HyperlinkButton   Name ="HyperlinkButtonName"  NavigateUri="{Binding URL}" VerticalAlignment="Stretch" HorizontalAlignment="Left"
-                                                   Content="{Binding Description}" HorizontalContentAlignment="Left"/>-->
                                 <TextBlock   HorizontalAlignment="Right" Margin="0,0,50,0"
                                 RelativePanel.AlignRightWithPanel="True"  Text="{Binding DateTime}" />
                                 <Rectangle Margin="20,5,20,0"  Height="2"  Fill="LightGray" VerticalAlignment="Bottom" HorizontalAlignment="Stretch" />

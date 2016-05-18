@@ -75,11 +75,6 @@ namespace SaveMyURL.Pages
 
         }
 
-        private async void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        }
-
         private void ListViewIteam_DoubleTapped(object sender, Windows.UI.Xaml.Input.DoubleTappedRoutedEventArgs e)
         {
             Group selectedGroup = (Group) ListViewIteam.SelectedItem;

@@ -143,6 +143,7 @@
     <Compile Include="Presentation\DisplayableTheme.cs" />
     <Compile Include="Presentation\SettingsViewModel.cs" />
     <Compile Include="Presentation\ShellViewModel.cs" />
+    <Compile Include="ViewModel\BytesToImageConverter.cs" />
     <Compile Include="ViewModel\GroupViewModel.cs" />
     <Compile Include="ViewModel\LinkViewModel.cs" />
   </ItemGroup>
@@ -153,6 +154,7 @@
     <None Include="SaveMyURL_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Brak.png" />
     <Content Include="Assets\picture-add-256x256.png" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />

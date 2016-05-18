@@ -34,7 +34,6 @@ namespace SaveMyURL.Model
                 DateTime = DateTime.Now,
                 Description = "O jak ja lubie wszystko i wszystkich",
                 URL = "https://www.facebook.com/",
-                Image = null,
                 Tags = listOfTags,
                 RatingStars = 5,
                 
@@ -44,7 +43,6 @@ namespace SaveMyURL.Model
                 DateTime = DateTime.Now,
                 URL = "https://www.o2.pl/",
                 Description = "cos nie gra",
-                Image = null,
                 Tags = listOfTags,
                 RatingStars = 5,
 
@@ -61,9 +59,6 @@ namespace SaveMyURL.Model
                 Image = null,
             };
             context.Groups.Add(group);
-
-
-
 
             context.SaveChanges();
         }

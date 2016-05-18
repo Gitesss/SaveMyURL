@@ -23,6 +23,12 @@ namespace SaveMyURL.ViewModel
             set { Set(ref _id, value); }
         }
 
+        private byte[] _image;
+        public byte[] ImageFromGroup
+        {
+            get { return _image; }
+            set { Set(ref _image, value); }
+        }
 
         private string _description = default(string);
         public string Description
@@ -67,13 +73,6 @@ namespace SaveMyURL.ViewModel
             set { Set(ref _text, value); }
         }
 
-        private BitmapImage _image; //I will this delete
-        public BitmapImage Image
-        {
-            get { return _image; }
-            set { Set(ref _image, value); }
-        }
-
         private DateTime _linkDay = DateTime.Now;
         public DateTime LinkDay
         {
@@ -96,6 +95,7 @@ namespace SaveMyURL.ViewModel
             GetLinks(group);
             GetTags();
             groupId = group.Id;
+            _image = group.Image;
         }
 
         public LinkViewModel()

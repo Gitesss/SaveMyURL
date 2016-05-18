@@ -6,15 +6,17 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="using:SaveMyURL.Model"
+    xmlns:viewModel="using:SaveMyURL.ViewModel"
     mc:Ignorable="d">
-    
-    
+
+    <Page.Resources>
+        <viewModel:BytesToImageConverter x:Key="converter" />
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <ScrollViewer Padding="{x:Bind Frame.Padding, Mode=OneWay}">
             <StackPanel>
                 <Grid>
                     <TextBlock Margin="10,0,0,0" Text="Grupy linków" Style="{StaticResource TitleTextBlockStyle}" />
-
                     <Button 
                     FontSize="24" 
                     RelativePanel.AlignRightWithPanel="True"
@@ -78,14 +80,18 @@
                         <DataTemplate>
                             <Grid>
                                 <StackPanel Orientation="Horizontal">
-                                    <Ellipse Margin="0,0,10,0"  Width="50" Height="50">
-                                        <Ellipse.Fill>
-                                            <ImageBrush>
-                                                <ImageBrush.ImageSource>
-                                                    <BitmapImage DecodePixelHeight="50" DecodePixelWidth="50" UriSource="../Assets/StoreLogo.png" />
-                                                </ImageBrush.ImageSource>
+                                    <Ellipse Margin="0,0,10,0" RenderTransformOrigin="1,1" Width="50" Height="50">
+                                        <Ellipse.Fill >
+                                            <ImageBrush x:Name="imageBrush" ImageSource="{Binding Image, Mode=TwoWay, Converter={StaticResource converter}}">
                                             </ImageBrush>
                                         </Ellipse.Fill>
+                                        <!--<Ellipse.Fill>
+                                            <ImageBrush >
+                                                <ImageBrush.ImageSource>
+                                                    <BitmapImage DecodePixelHeight="50" DecodePixelWidth="50" x:Name="ImageEllipse"/>
+                                                </ImageBrush.ImageSource>
+                                            </ImageBrush>
+                                        </Ellipse.Fill>-->
                                     </Ellipse>
                                     <StackPanel Orientation="Vertical">
                                         <TextBlock Name ="txtName"  VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Name}" Style="{ThemeResource BaseTextBlockStyle}"/>

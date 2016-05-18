@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.Storage.Streams;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Media.Imaging;
 using SaveMyURL.Annotations;
@@ -35,8 +37,8 @@ namespace SaveMyURL.ViewModel
             set { Set(ref _name, value); }
         }
 
-        private BitmapImage _image;
-        public BitmapImage Image
+        private byte[] _image;
+        public byte[] Image
         {
             get { return _image; }
             set { Set(ref _image, value); }
@@ -57,11 +59,10 @@ namespace SaveMyURL.ViewModel
         }
         #endregion
 
-
+        private byte[] buffer;
         public GroupViewModel()
         {
             GetGroups();
-
         }
 
 
@@ -143,7 +144,7 @@ namespace SaveMyURL.ViewModel
         //    }
         //}
 
-        private void AddGroup(string name, BitmapImage image)
+        private void AddGroup(string name)
         {
             using (var logic = new GroupService())
             {
@@ -152,7 +153,7 @@ namespace SaveMyURL.ViewModel
                 {
                     GroupDay = DateTime.Now,
                     Name = name,
-                    //  Image = await ConvertImageSql.ConvertToBytesAsync(image),
+                    Image = buffer,
                     Links = new List<Link>(),
                 };
 
@@ -161,33 +162,38 @@ namespace SaveMyURL.ViewModel
 
                 Groups.Add(group);
             }
+            buffer = null;
+            _image = null;
+            _name = null;
         }
 
-        //public async void AddImage()
-        //{
-        //    FileOpenPicker openPicker = new FileOpenPicker();
 
-        //    openPicker.ViewMode = PickerViewMode.Thumbnail;
-        //    openPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
-        //    openPicker.FileTypeFilter.Add(".jpeg");
-        //    openPicker.FileTypeFilter.Add(".png");
-        //    openPicker.FileTypeFilter.Add(".bmp");
-        //    openPicker.FileTypeFilter.Add(".jpg");
+        public async void AddImage()
+        {
+            FileOpenPicker picker = new FileOpenPicker();
+            picker.FileTypeFilter.Add(".bmp");
+            picker.FileTypeFilter.Add(".png");
+            picker.FileTypeFilter.Add(".jpg");
 
-        //    StorageFile file = await openPicker.PickSingleFileAsync();
-        //    if (file != null)
-        //    {
-        //        var stream = await file.OpenAsync(Windows.Storage.FileAccessMode.Read);
-        //        var image = new BitmapImage();
-        //        image.SetSource(stream);
-        //        Image = image;
-        //    }
-        //    else
-        //    {
-        //        string error = "Nie wybrano żadnego pliku jpg/png";
+            StorageFile file = await picker.PickSingleFileAsync();
 
-        //    }
-        //}
+            using (var inputStream = await file.OpenSequentialReadAsync())
+            {
+                var readStream = inputStream.AsStreamForRead();
+                buffer = new byte[readStream.Length];
+                await readStream.ReadAsync(buffer, 0, buffer.Length);
+            }
+
+            using (InMemoryRandomAccessStream stream = new InMemoryRandomAccessStream())
+            {
+                using (DataWriter writer = new DataWriter(stream.GetOutputStreamAt(0)))
+                {
+                    writer.WriteBytes(buffer);
+                    await writer.StoreAsync();
+                }
+                Image = buffer;
+            }
+        }
 
         public async void DeleteGroup(Group objectToDelete)
         {
@@ -214,7 +220,7 @@ namespace SaveMyURL.ViewModel
         {
             get
             {
-                return new Command(_ => AddGroup(Name, Image));
+                return new Command(_ => AddGroup(Name));
             }
         }
 
