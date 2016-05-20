@@ -15,7 +15,6 @@ namespace SaveMyURL.ViewModel
                 image.UriSource = new Uri("ms-appx:///Assets/brak.png");
                 return image;
             }
-                //return null;
 
             using (InMemoryRandomAccessStream ms = new InMemoryRandomAccessStream())
             {
